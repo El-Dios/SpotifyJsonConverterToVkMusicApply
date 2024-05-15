@@ -32,7 +32,7 @@ T Deserialize<T>(string json)
     return JsonSerializer.Deserialize<T>(json, s_readOptions)!;
 }
 
-string fileName = @"D:\Progs\VisualStudio\repos\SpotifyPlaylistJSONParserToVkMusicFormat\Playlist1.json";
+string fileName = @"Choose your filepath to SpotifyPlaylist.json";
 
 List<SpotifyPlaylist> playlists = DeserializeSptfyJson(fileName);
 
@@ -128,6 +128,7 @@ void WriteSeparateVkCompPlaylists(List<SpotifyPlaylist> _playlists)
             Console.WriteLine($"Processing Playlist \"{playlist.Name}\" failed: {e.Message}");
         }
 
+        Console.WriteLine(playlist.Items.Length);
         Regex reg = new("[/:*?\"\\\\<>|]");
         string writeFileName = $"VkComp {reg.Replace(playlist.Name, string.Empty)}.json";
         string jsonStringWrite = Serialize(playlistVk);
